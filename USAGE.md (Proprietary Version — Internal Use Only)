@@ -1,0 +1,80 @@
+# Lodgr — Internal Usage Guide  
+**Proprietary & Confidential — Not for Public Distribution**
+
+This document provides internal instructions for running, testing, and developing the Lodgr platform.  
+All materials, designs, workflows, and code referenced in this file are confidential property of **[Your Name / Company]**.
+
+Unauthorized access, screening, reproduction, or external sharing of this documentation is strictly prohibited.
+
+---
+
+# 📦 1. Project Overview
+
+Lodgr is a proprietary event-focused accommodation platform with:
+- Paid couch-surfing options  
+- Budget shared rooms  
+- Private rooms  
+- Event-based search (stadiums, fan zones, transit nodes)  
+- Host tools and safety features  
+
+This usage guide explains how team members can run and work on the project locally.
+
+---
+
+# 🛠️ 2. System Requirements
+
+Before running the project, ensure you have:
+
+### **Core Dependencies**
+- Node.js (v18+ recommended)  
+- npm or yarn  
+- PostgreSQL (local or cloud instance)  
+- Git  
+- A terminal environment (Mac, Windows, Linux)
+
+### **Optional Mobile Requirements**
+- Xcode (for iOS)  
+- Android Studio (for Android)  
+- Expo CLI (if using Expo workflow)
+
+### **Required Access**
+You must have:
+- Access to the **private GitHub repository**  
+- Internal API keys (distributed securely)  
+- Database credentials  
+- Map API credentials  
+- Access to cloud environments (if applicable)
+
+---
+
+# 🔑 3. Environment Variables
+
+Environment files (**.env**) must be stored **locally only** and **must NOT** be committed under any circumstance.
+
+### Create `.env` in `/backend` and `/frontend`:
+
+Example `.env` variables:
+
+DATABASE_URL=postgres://user:password@localhost:5432/lodgr
+JWT_SECRET=your_internal_secret
+STRIPE_SECRET_KEY=your_stripe_key
+MAP_API_KEY=your_mapbox_or_google_key
+STORAGE_BUCKET=your_cloud_storage_bucket
+
+
+> Never send `.env` files over public channels.  
+> Use encrypted channels for key distribution.
+
+---
+
+# 🧱 4. Project Structure (Internal)
+
+/frontend → React/Next.js web client
+/backend → Node.js/NestJS or Express API
+/mobile → React Native or Expo client (optional)
+/docs → Internal documentation
+/scripts → Deployment & automation scripts
+
+If the structure evolves, update this document accordingly.
+
+
