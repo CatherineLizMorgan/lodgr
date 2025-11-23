@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      DATABASE_URL: "file:./dev.db"
+      JWT_SECRET: "lodgr-secret-key-change-in-production-2024"
+      JWT_EXPIRATION: "7d"
+      PORT: 3001
+      NODE_ENV: "development"
+      FRONTEND_URL: "http://localhost:3000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    command: sh -c "npx prisma generate && npx prisma migrate deploy && npm run start:dev"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: "http://localhost:3001/api"
+      NEXT_PUBLIC_APP_NAME: "Lodgr"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - backend
